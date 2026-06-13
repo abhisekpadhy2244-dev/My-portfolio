@@ -32,44 +32,43 @@
         background: var(--bg);
         color: var(--text);
         font-family: "DM Sans", sans-serif;
-        cursor: none;
         overflow-x: hidden;
       }
 
-      /* CUSTOM CURSOR */
-      #cursor {
-        position: fixed;
-        width: 10px;
-        height: 10px;
-        background: var(--acc);
-        border-radius: 50%;
-        pointer-events: none;
-        z-index: 9999;
-        transform: translate(-50%, -50%);
-        transition:
-          transform 0.1s,
-          width 0.2s,
-          height 0.2s,
-          background 0.2s;
-        mix-blend-mode: difference;
-      }
+      /* CUSTOM CURSOR — neon ring + glow dot */
       #cursor-ring {
         position: fixed;
         width: 36px;
         height: 36px;
-        border: 1px solid rgba(232, 255, 71, 0.4);
+        border: 1.5px solid var(--acc);
         border-radius: 50%;
         pointer-events: none;
         z-index: 9998;
         transform: translate(-50%, -50%);
         transition:
-          transform 0.08s linear,
-          width 0.3s,
-          height 0.3s,
-          opacity 0.3s;
+          width 0.25s ease,
+          height 0.25s ease,
+          border-color 0.4s ease,
+          box-shadow 0.4s ease;
+        box-shadow:
+          0 0 12px rgba(232, 255, 71, 0.2),
+          inset 0 0 6px rgba(232, 255, 71, 0.06);
+        backdrop-filter: blur(2px);
+        mix-blend-mode: screen;
       }
-      body:hover #cursor-ring {
-        opacity: 1;
+
+      #cursor-dot {
+        position: fixed;
+        width: 4px;
+        height: 4px;
+        background: var(--acc);
+        border-radius: 50%;
+        pointer-events: none;
+        z-index: 9999;
+        transform: translate(-50%, -50%);
+        box-shadow: 0 0 10px 3px var(--acc);
+        transition: opacity 0.2s;
+        opacity: 0.8;
       }
 
       /* NAV */
@@ -194,7 +193,7 @@
         letter-spacing: 1px;
         padding: 14px 28px;
         border-radius: 2px;
-        cursor: none;
+        cursor: pointer;
         text-decoration: none;
         transition: all 0.2s;
         display: inline-block;
@@ -489,7 +488,7 @@
         align-items: center;
         gap: 40px;
         transition: background 0.25s;
-        cursor: none;
+        cursor: pointer;
         border-bottom: 1px solid var(--border);
       }
       .proj-item:hover {
@@ -719,7 +718,7 @@
         color: var(--bg);
         border: none;
         padding: 16px 32px;
-        cursor: none;
+        cursor: pointer;
         border-radius: 2px;
         transition:
           background 0.2s,
@@ -831,7 +830,7 @@
     </style>
   </head>
   <body>
-    <div id="cursor"></div>
+    <div id="cursor-dot"></div>
     <div id="cursor-ring"></div>
 
     <!-- NAV -->
@@ -1336,7 +1335,9 @@
           <div class="c-info-item">
             INSTAGRAM
             <div class="c-info-val">
-              <a href="https://www.instagram.com/abhi_padhy24/" target="_blank">@abhi_padhy24</a>
+              <a href="https://www.instagram.com/abhi_padhy24/" target="_blank"
+                >@abhi_padhy24</a
+              >
             </div>
           </div>
           <div class="c-info-item">
@@ -1401,19 +1402,22 @@
     </footer>
 
     <script>
-      /* CURSOR */
-      const cur = document.getElementById("cursor");
+      /* CURSOR — neon ring + glow dot */
+      const dot = document.getElementById("cursor-dot");
       const ring = document.getElementById("cursor-ring");
       let mx = 0,
         my = 0,
         rx = 0,
         ry = 0;
+
       document.addEventListener("mousemove", (e) => {
         mx = e.clientX;
         my = e.clientY;
-        cur.style.left = mx + "px";
-        cur.style.top = my + "px";
+        dot.style.left = mx + "px";
+        dot.style.top = my + "px";
       });
+
+      /* Ring follows with lag */
       (function animRing() {
         rx += (mx - rx) * 0.12;
         ry += (my - ry) * 0.12;
@@ -1421,16 +1425,94 @@
         ring.style.top = ry + "px";
         requestAnimationFrame(animRing);
       })();
+
+      /* Ring grows & glows on interactive elements */
+      function setRingNormal() {
+        ring.style.width = "36px";
+        ring.style.height = "36px";
+        ring.style.borderColor = "var(--acc)";
+        ring.style.boxShadow =
+          "0 0 12px rgba(232,255,71,0.2), inset 0 0 6px rgba(232,255,71,0.06)";
+      }
+      function setRingHover() {
+        ring.style.width = "52px";
+        ring.style.height = "52px";
+        ring.style.borderColor = "var(--acc)";
+        ring.style.boxShadow =
+          "0 0 28px rgba(232,255,71,0.45), inset 0 0 14px rgba(232,255,71,0.12)";
+      }
+      document
+        .querySelectorAll("a,button,.proj-item,.social-card,.skill-cell")
+        .forEach((el) => {
+          el.addEventListener("mouseenter", setRingHover);
+          el.addEventListener("mouseleave", setRingNormal);
+        });
+
+      /* Click burst effect */
+      document.addEventListener("click", (e) => {
+        const burst = document.createElement("div");
+        burst.style.cssText = `
+          position: fixed;
+          left: ${e.clientX}px;
+          top: ${e.clientY}px;
+          width: 0px;
+          height: 0px;
+          border-radius: 50%;
+          border: 1.5px solid var(--acc);
+          pointer-events: none;
+          z-index: 9997;
+          transform: translate(-50%, -50%);
+          box-shadow: 0 0 20px rgba(232,255,71,0.5);
+          transition: none;
+        `;
+        document.body.appendChild(burst);
+        requestAnimationFrame(() => {
+          burst.style.transition =
+            "width 0.5s ease-out, height 0.5s ease-out, opacity 0.5s ease-out";
+          burst.style.width = "80px";
+          burst.style.height = "80px";
+          burst.style.opacity = "0";
+        });
+        setTimeout(() => burst.remove(), 600);
+      });
+
+      /* Section-based color shifts */
+      const sections = [
+        { id: "skills", color: "#00d4aa" },
+        { id: "projects", color: "#ff6b35" },
+        { id: "social", color: "#e8ff47" },
+        { id: "contact", color: "#060608" },
+      ];
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              const match = sections.find((s) => s.id === entry.target.id);
+              if (match) {
+                ring.style.borderColor = match.color;
+                dot.style.background = match.color;
+                dot.style.boxShadow = `0 0 10px 3px ${match.color}`;
+                // Reset on mouseleave from interactives
+              }
+            }
+          });
+        },
+        { threshold: 0.3 },
+      );
+      sections.forEach((s) => {
+        const el = document.getElementById(s.id);
+        if (el) observer.observe(el);
+      });
+
+      /* Reset ring color when over interactives (already handled above via setRingHover) */
+      // Override: on hover over interactives, always use acc color
       document
         .querySelectorAll("a,button,.proj-item,.social-card,.skill-cell")
         .forEach((el) => {
           el.addEventListener("mouseenter", () => {
-            cur.style.width = "18px";
-            cur.style.height = "18px";
-          });
-          el.addEventListener("mouseleave", () => {
-            cur.style.width = "10px";
-            cur.style.height = "10px";
+            ring.style.borderColor = "var(--acc)";
+            dot.style.background = "var(--acc)";
+            dot.style.boxShadow = "0 0 10px 3px var(--acc)";
           });
         });
 
