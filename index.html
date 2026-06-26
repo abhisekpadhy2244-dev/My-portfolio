@@ -15,15 +15,15 @@
         box-sizing: border-box;
       }
       :root {
-        --bg: #060608;
-        --s1: #0e0e14;
-        --s2: #16161f;
-        --acc: #e8ff47;
-        --acc2: #ff6b35;
-        --acc3: #00d4aa;
-        --text: #f0eee8;
-        --muted: #6b6880;
-        --border: rgba(240, 238, 232, 0.08);
+        --bg: #0d0d0c;
+        --s1: #171614;
+        --s2: #201f1c;
+        --acc: #c9a24b;
+        --acc2: #8a6a2f;
+        --acc3: #f9f6f0;
+        --text: #f9f6f0;
+        --muted: #9a9388;
+        --border: rgba(249, 246, 240, 0.1);
       }
       html {
         scroll-behavior: smooth;
@@ -51,8 +51,8 @@
           border-color 0.4s ease,
           box-shadow 0.4s ease;
         box-shadow:
-          0 0 12px rgba(232, 255, 71, 0.2),
-          inset 0 0 6px rgba(232, 255, 71, 0.06);
+          0 0 12px rgba(201, 162, 75, 0.2),
+          inset 0 0 6px rgba(201, 162, 75, 0.06);
         backdrop-filter: blur(2px);
         mix-blend-mode: screen;
       }
@@ -200,7 +200,7 @@
       }
       .btn-filled {
         background: var(--acc);
-        color: #060608;
+        color: #0d0d0c;
         font-weight: 500;
       }
       .btn-filled:hover {
@@ -576,7 +576,7 @@
       }
       .social-card:hover {
         border-color: var(--acc);
-        background: rgba(232, 255, 71, 0.03);
+        background: rgba(201, 162, 75, 0.06);
       }
       .social-card:hover::after {
         color: var(--acc);
@@ -611,6 +611,10 @@
       }
       .si-tw {
         background: #1da1f2;
+      }
+      .si-lc {
+        background: #1a1a1a;
+        border: 1px solid #ffa116;
       }
       .s-name {
         font-size: 16px;
@@ -919,19 +923,19 @@
             padding: 20px 24px;
             border-radius: 6px;
             text-decoration: none;
-            background: linear-gradient(135deg, #ff6b35 0%, #e8ff47 100%);
+            background: linear-gradient(135deg, #8a6a2f 0%, #c9a24b 100%);
             transition:
               transform 0.2s,
               box-shadow 0.2s;
-            box-shadow: 0 0 0 0 rgba(232, 255, 71, 0.3);
+            box-shadow: 0 0 0 0 rgba(201, 162, 75, 0.3);
           "
           onmouseover="
             this.style.transform = 'translateY(-3px)';
-            this.style.boxShadow = '0 12px 40px rgba(255,107,53,0.35)';
+            this.style.boxShadow = '0 12px 40px rgba(201,162,75,0.35)';
           "
           onmouseout="
             this.style.transform = '';
-            this.style.boxShadow = '0 0 0 0 rgba(232,255,71,0.3)';
+            this.style.boxShadow = '0 0 0 0 rgba(201,162,75,0.3)';
           "
         >
           <div>
@@ -939,7 +943,7 @@
               style="
                 font-family: &quot;Bebas Neue&quot;, sans-serif;
                 font-size: 22px;
-                color: #060608;
+                color: #0d0d0c;
                 letter-spacing: 2px;
               "
             >
@@ -1171,7 +1175,7 @@
           display: flex;
           align-items: center;
           justify-content: space-between;
-          border: 1px solid rgba(240, 238, 232, 0.12);
+          border: 1px solid rgba(249, 246, 240, 0.12);
           border-radius: 6px;
           padding: 32px 40px;
           text-decoration: none;
@@ -1181,11 +1185,11 @@
             background 0.25s;
         "
         onmouseover="
-          this.style.borderColor = '#e8ff47';
-          this.style.background = '#0e0e14';
+          this.style.borderColor = '#c9a24b';
+          this.style.background = '#201f1c';
         "
         onmouseout="
-          this.style.borderColor = 'rgba(240,238,232,0.12)';
+          this.style.borderColor = 'rgba(249,246,240,0.12)';
           this.style.background = 'var(--s1)';
         "
       >
@@ -1249,6 +1253,17 @@
           <div>
             <div class="s-name">GitHub</div>
             <div class="s-handle">github.com/abhisekpadhy2244-dev</div>
+          </div>
+        </a>
+        <a
+          class="social-card"
+          href="https://leetcode.com/u/Z68phyhrc3/"
+          target="_blank"
+        >
+          <div class="s-icon-wrap si-lc">🧩</div>
+          <div>
+            <div class="s-name">LeetCode</div>
+            <div class="s-handle">leetcode.com/u/Z68phyhrc3</div>
           </div>
         </a>
         <a
@@ -1329,6 +1344,14 @@
             <div class="c-info-val">
               <a href="https://github.com/abhisekpadhy2244-dev" target="_blank"
                 >github.com/abhisekpadhy2244-dev</a
+              >
+            </div>
+          </div>
+          <div class="c-info-item">
+            LEETCODE
+            <div class="c-info-val">
+              <a href="https://leetcode.com/u/Z68phyhrc3/" target="_blank"
+                >leetcode.com/u/Z68phyhrc3</a
               >
             </div>
           </div>
@@ -1432,14 +1455,14 @@
         ring.style.height = "36px";
         ring.style.borderColor = "var(--acc)";
         ring.style.boxShadow =
-          "0 0 12px rgba(232,255,71,0.2), inset 0 0 6px rgba(232,255,71,0.06)";
+          "0 0 12px rgba(201,162,75,0.2), inset 0 0 6px rgba(201,162,75,0.06)";
       }
       function setRingHover() {
         ring.style.width = "52px";
         ring.style.height = "52px";
         ring.style.borderColor = "var(--acc)";
         ring.style.boxShadow =
-          "0 0 28px rgba(232,255,71,0.45), inset 0 0 14px rgba(232,255,71,0.12)";
+          "0 0 28px rgba(201,162,75,0.45), inset 0 0 14px rgba(201,162,75,0.12)";
       }
       document
         .querySelectorAll("a,button,.proj-item,.social-card,.skill-cell")
@@ -1462,7 +1485,7 @@
           pointer-events: none;
           z-index: 9997;
           transform: translate(-50%, -50%);
-          box-shadow: 0 0 20px rgba(232,255,71,0.5);
+          box-shadow: 0 0 20px rgba(201,162,75,0.5);
           transition: none;
         `;
         document.body.appendChild(burst);
@@ -1478,10 +1501,10 @@
 
       /* Section-based color shifts */
       const sections = [
-        { id: "skills", color: "#00d4aa" },
-        { id: "projects", color: "#ff6b35" },
-        { id: "social", color: "#e8ff47" },
-        { id: "contact", color: "#060608" },
+        { id: "skills", color: "#f9f6f0" },
+        { id: "projects", color: "#c9a24b" },
+        { id: "social", color: "#c9a24b" },
+        { id: "contact", color: "#f9f6f0" },
       ];
       const observer = new IntersectionObserver(
         (entries) => {
@@ -1564,7 +1587,7 @@
           p.x += p.vx;
           p.y += p.vy;
         });
-        ctx.strokeStyle = "rgba(240,238,232,0.06)";
+        ctx.strokeStyle = "rgba(249,246,240,0.06)";
         ctx.lineWidth = 0.5;
         for (let i = 0; i < pts.length; i++) {
           for (let j = i + 1; j < pts.length; j++) {
@@ -1582,7 +1605,7 @@
         pts.forEach((p) => {
           ctx.beginPath();
           ctx.arc(p.x, p.y, 1.5, 0, Math.PI * 2);
-          ctx.fillStyle = "rgba(232,255,71,0.25)";
+          ctx.fillStyle = "rgba(201,162,75,0.25)";
           ctx.fill();
         });
         requestAnimationFrame(drawCanvas);
